@@ -38,7 +38,7 @@ export default function Login() {
   if (status === "authenticated") return null;
 
   return (
-    <div className="py-60 px-6">
+    <div className="py-60 px-6 bg-red-600">
       <form
         className="flex flex-col gap-5 max-w-[500px] mx-auto"
         onSubmit={(e) => {
@@ -47,8 +47,18 @@ export default function Login() {
           onSubmit(formData);
         }}
       >
-        <input type="email" name="email" required />
-        <input type="password" name="password" required />
+        <input
+          type="email"
+          name="email"
+          required
+          className="border-2 border-black-500 px-5 h-10"
+        />
+        <input
+          type="password"
+          name="password"
+          required
+          className="border-2 border-black-500 px-5 h-10"
+        />
 
         <button type="submit" className="bg-green-400">
           Submit
