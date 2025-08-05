@@ -9,6 +9,7 @@ export default function Login() {
   const { data: session, status, update } = useSession();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -17,15 +18,17 @@ export default function Login() {
   }, [status, router]);
 
   const onSubmit = async (data: FormData) => {
-    setError(null);
-
     const email = data.get("email") as string;
     const password = data.get("password") as string;
+
+    setIsLoading(true);
+    setError(null);
 
     const response = await credentialLogin({ email, password });
 
     if (response?.error) {
       setError(response.error); // ✅ This now contains the backend error message
+      setIsLoading(false);
       return;
     }
 
@@ -61,7 +64,7 @@ export default function Login() {
         />
 
         <button type="submit" className="bg-green-400 h-10">
-          Submit
+          {isLoading ? "Loading..." : "Submit"}
         </button>
         {error && <p className="text-red-500">{error}</p>}
       </form>
