@@ -9,7 +9,6 @@ export type TLoginResponse = {
 };
 
 export const LOGIN_PATH = "/admin/auth/login";
-export const BASE_URL = "https://crf-staging.thrindlebusiness.com";
 
 export const { handlers, signIn, signOut, auth, unstable_update } = NextAuth({
   pages: {
@@ -23,7 +22,7 @@ export const { handlers, signIn, signOut, auth, unstable_update } = NextAuth({
     maxAge: 60 * 60 * 24 * 5,
   },
 
-  secret: `${process.env.AUTH_SECRET}`,
+  secret: `${process.env.NEXTAUTH_SECRET}`,
 
   providers: [
     Credential({
@@ -40,7 +39,7 @@ export const { handlers, signIn, signOut, auth, unstable_update } = NextAuth({
           >;
 
           const response = await axios.post(
-            `${BASE_URL}${LOGIN_PATH}`,
+            `${process.env.NEXTAUTH_BASE_URL}${LOGIN_PATH}`,
             { email, password },
             {
               headers: { "Content-Type": "application/json" },
