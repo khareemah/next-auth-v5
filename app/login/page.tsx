@@ -34,7 +34,7 @@ export default function Login() {
 
     if (response?.ok) {
       await update();
-      router.push("/dashboard");
+      router.push("/");
     }
   };
 
